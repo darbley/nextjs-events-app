@@ -1,0 +1,13 @@
+@import '../../styles/scss/partials/vars';
+
+.events-list {
+    display: block;
+    width: 90%;
+    //max-width: 600px;
+    max-width: 40rem;
+    margin: 5rem auto;
+
+    @media(min-width: $screen-md){
+        max-width: 850px;
+    }
+}
