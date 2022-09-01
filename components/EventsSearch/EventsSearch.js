@@ -1,22 +1,35 @@
 
 import LinkButton from '../UI/LinkButton/LinkButton';
 import cssClass from './events-search.module.scss';
+import { useRef } from 'react';
 
 const EventsSearch = (props) => {
+
+    const yearInputRef = useRef();
+    const monthInputRef = useRef();
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const selectedYear = yearInputRef.current.value;
+        const selectedMonth = monthInputRef.current.value;
+
+        props.onSearch(selectedYear, selectedMonth);
+    }
 
     return (
         <form className={cssClass.form}>
             <div className={cssClass.controls}>
                 <div className={cssClass.control}>
                     <label htmlFor='year'>Year</label>
-                    <select id='year'>
-                        <option>2021</option>
-                        <option>2022</option>
+                    <select id='year' ref={yearInputRef}>
+                        <option value='2021'>2021</option>
+                        <option value='2022'>2022</option>
                     </select>
                 </div>
                 <div className={cssClass.control}>
                     <label htmlFor='month'>Month</label>
-                    <select id='month'>
+                    <select id='month' ref={monthInputRef}>
                         <option value='1'>January</option>
                         <option value='2'>February</option>
                         <option value='3'>March</option>
@@ -28,11 +41,11 @@ const EventsSearch = (props) => {
                         <option value='9'>Sept</option>
                         <option value='10'>Oct</option>
                         <option value='11'>Nov</option>
-                        <opiton value='12'>Dec</opiton>
+                        <option value='12'>Dec</option>
                     </select>
                 </div>
             </div>
-            <LinkButton>Find Events</LinkButton>
+            <LinkButton onClick={submitHandler}>Find Events</LinkButton>
         </form>
     )
 }
